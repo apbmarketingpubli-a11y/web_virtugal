@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="VirtuGal — Centro de experiencias de realidad virtual en Vigo. Descubre Galicia de una forma única a través de la tecnología VR de última generación." />
+  <meta name="keywords" content="realidad virtual, VR, Vigo, Galicia, experiencias inmersivas, entretenimiento, tecnología" />
+  <meta name="author" content="VirtuGal" />
+  <meta name="robots" content="index, follow" />
+  <meta property="og:title" content="VirtuGal — Experiencias VR en Vigo" />
+  <meta property="og:description" content="Descubre Galicia como nunca antes a través de la realidad virtual." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://www.virtugal.com" />
+  <title>VirtuGal — Experiencias VR en Vigo</title>
+
+  <!-- Preconnect fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+
+  <style>
+    /* ── Glitch title effect ─────────────────────────── */
+    .glitch {
+      position: relative;
+    }
+    .glitch::before, .glitch::after {
+      content: attr(data-text);
+      position: absolute; top: 0; left: 0;
+      width: 100%; height: 100%;
+      font-family: inherit; font-size: inherit; font-weight: inherit;
+      letter-spacing: inherit; line-height: inherit;
+    }
+    .glitch::before {
+      color: var(--accent-cyan);
+      clip-path: polygon(0 30%, 100% 30%, 100% 50%, 0 50%);
+      transform: translateX(-3px);
+      animation: glitch1 4s infinite;
+      opacity: 0.7;
+    }
+    .glitch::after {
+      color: var(--accent-purple);
+      clip-path: polygon(0 60%, 100% 60%, 100% 80%, 0 80%);
+      transform: translateX(3px);
+      animation: glitch2 4s infinite;
+      opacity: 0.7;
+    }
+    @keyframes glitch1 {
+      0%,90%,100% { transform: translateX(0); opacity: 0; }
+      92% { transform: translateX(-4px); opacity: 0.7; }
+      94% { transform: translateX(0); opacity: 0; }
+    }
+    @keyframes glitch2 {
+      0%,90%,100% { transform: translateX(0); opacity: 0; }
+      93% { transform: translateX(4px); opacity: 0.7; }
+      95% { transform: translateX(0); opacity: 0; }
+    }
+
+    /* ── Divider ────────────────────────────────────── */
+    .divider {
+      height: 1px;
+      background: linear-gradient(90deg, transparent 0%, var(--border-bright) 30%, var(--accent-purple) 50%, var(--border-bright) 70%, transparent 100%);
+      margin: 0 5%;
+    }
+
+    /* ── Highlight box ──────────────────────────────── */
+    .highlight-band {
+      background: linear-gradient(135deg, rgba(45,59,255,0.08), rgba(123,47,255,0.08));
+      border: 1px solid var(--border);
+      padding: 2rem 2.5rem;
+      display: flex; gap: 3rem; align-items: center; flex-wrap: wrap;
+      margin: 3rem 0;
+    }
+    .highlight-band .hl-item {
+      display: flex; flex-direction: column;
+    }
+    .highlight-band .hl-num {
+      font-family: var(--font-display);
+      font-size: 2.2rem; font-weight: 900;
+      color: var(--accent-cyan);
+    }
+    .highlight-band .hl-label {
+      font-family: var(--font-display);
+      font-size: 0.6rem; letter-spacing: 0.2em;
+      color: var(--text-muted); text-transform: uppercase;
+    }
+
+    /* ── Blog category badges ───────────────────────── */
+    .cat-badge {
+      display: inline-block;
+      padding: 3px 10px;
+      font-family: var(--font-display);
+      font-size: 0.5rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      border: 1px solid var(--accent-purple);
+      color: var(--accent-purple);
+      margin-bottom: 0.6rem;
+    }
+
+    /* ── Map placeholder ────────────────────────────── */
+    .map-placeholder {
+      width: 100%; height: 280px;
+      background: var(--bg-card2);
+      border: 1px solid var(--border);
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      gap: 0.5rem;
+      margin-top: 2rem;
+    }
+    .map-placeholder span {
+      font-family: var(--font-display);
+      font-size: 0.62rem;
+      letter-spacing: 0.2em;
+      color: var(--text-muted);
+      text-transform: uppercase;
+    }
+    .map-placeholder .map-icon { font-size: 2rem; }
+    .map-address {
+      font-family: var(--font-text);
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Ambient effects -->
+<div class="scanline"></div>
+<div class="cursor"></div>
+<div class="cursor-ring"></div>
+
+<!-- ════════════ NAVBAR ════════════ -->
+<nav id="navbar" role="navigation" aria-label="Navegación principal">
+  <a href="#inicio" class="nav-logo">VIRTU<span>GAL</span></a>
+
+  <ul class="nav-links" role="list">
+    <li><a href="#inicio">Inicio</a></li>
+    <li><a href="#experiencias">Experiencias</a></li>
+    <li><a href="#nosotros">Nosotros</a></li>
+    <li><a href="#blog">Blog</a></li>
+    <li><a href="#contacto">Contacto</a></li>
+  </ul>
+
+  <a href="#contacto" class="nav-cta"><span>RESERVAR</span></a>
+
+  <button class="hamburger" aria-label="Abrir menú" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- Mobile nav -->
+<nav class="nav-mobile" aria-label="Menú móvil">
+  <a href="#inicio">Inicio</a>
+  <a href="#experiencias">Experiencias</a>
+  <a href="#nosotros">Nosotros</a>
+  <a href="#blog">Blog</a>
+  <a href="#contacto">Contacto</a>
+  <a href="#contacto" style="color:var(--accent-cyan)">RESERVAR</a>
+</nav>
+
+<!-- ════════════ HERO ════════════ -->
+<section id="inicio" class="hero" aria-label="Presentación principal">
+  <div class="hero-bg"></div>
+  <div class="hero-grid" aria-hidden="true"></div>
+
+  <div class="hero-content">
+    <div class="hero-tag">Vigo · Galicia · VR</div>
+    <h1 class="hero-title">
+      <span class="glitch" data-text="VER GALICIA">VER GALICIA</span><br/>
+      <em>COMO NUNCA</em><br/>
+      <span class="line2">ANTES</span>
+    </h1>
+    <p class="hero-desc">
+      Centro de experiencias de realidad virtual en el corazón de Vigo.
+      Explora las Rías Baixas, vive la historia gallega y descubre paisajes únicos
+      mediante tecnología VR de última generación.
+    </p>
+    <div class="hero-actions">
+      <a href="#experiencias" class="btn-primary"><span>VER EXPERIENCIAS</span></a>
+      <a href="#nosotros" class="btn-secondary">Conoce el proyecto →</a>
+    </div>
+  </div>
+
+  <div class="hero-visual" aria-hidden="true">
+    <div class="hero-orb"></div>
+  </div>
+
+  <div class="hero-stats" aria-label="Estadísticas clave">
+    <div class="stat-item">
+      <span class="stat-number" data-count="6" data-suffix="+">0+</span>
+      <span class="stat-label">Experiencias</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-number" data-count="100" data-suffix="%">0%</span>
+      <span class="stat-label">Inmersión</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-number" data-count="0" data-suffix=" m²">0 m²</span>
+      <span class="stat-label" style="white-space:nowrap">81 m² de espacio</span>
+    </div>
+  </div>
+</section>
+
+<div class="divider" aria-hidden="true"></div>
+
+<!-- ════════════ EXPERIENCIAS ════════════ -->
+<section id="experiencias" class="experiences" aria-labelledby="exp-heading">
+  <div class="exp-header">
+    <p class="section-tag">Lo que ofrecemos</p>
+    <h2 class="section-title reveal" id="exp-heading">Experiencias <span>Inmersivas</span></h2>
+    <p class="section-desc reveal">Sesiones individuales y grupales con la tecnología VR más avanzada. Cada experiencia está diseñada para transportarte a otro mundo.</p>
+  </div>
+
+  <div class="exp-grid">
+
+    <article class="exp-card reveal" aria-label="Rías Baixas Virtual">
+      <div class="exp-icon" aria-hidden="true">🌊</div>
+      <h3>RÍAS BAIXAS VIRTUAL</h3>
+      <p>Navega por las aguas de las Rías Baixas, explora sus playas y descubre el patrimonio marino gallego desde una perspectiva única.</p>
+      <span class="exp-tag">Turismo</span>
+    </article>
+
+    <article class="exp-card reveal" aria-label="Rally Rías Baixas">
+      <div class="exp-icon" aria-hidden="true">🏎️</div>
+      <h3>RALLY RÍAS BAIXAS</h3>
+      <p>Vive desde dentro la adrenalina del Rally Rías Baixas. Siente la velocidad y el rugido del motor en una simulación de alta fidelidad.</p>
+      <span class="exp-tag">Adrenalina</span>
+    </article>
+
+    <article class="exp-card reveal" aria-label="Historia de Galicia">
+      <div class="exp-icon" aria-hidden="true">🏛️</div>
+      <h3>HISTORIA DE GALICIA</h3>
+      <p>Viaja en el tiempo y recorre la historia gallega: el Camino de Santiago medieval, castros celtas y la evolución de una tierra milenaria.</p>
+      <span class="exp-tag">Educativo</span>
+    </article>
+
+    <article class="exp-card reveal" aria-label="Team Building VR">
+      <div class="exp-icon" aria-hidden="true">👥</div>
+      <h3>TEAM BUILDING VR</h3>
+      <p>Actividades colaborativas en entornos virtuales diseñadas para empresas. Potencia el trabajo en equipo, la coordinación y la comunicación.</p>
+      <span class="exp-tag">Empresas</span>
+    </article>
+
+    <article class="exp-card reveal" aria-label="Viaje Educativo">
+      <div class="exp-icon" aria-hidden="true">🎓</div>
+      <h3>VIAJE EDUCATIVO</h3>
+      <p>Herramienta pedagógica para centros escolares. Ciencias, historia del arte y geografía cobran vida en experiencias 360° memorables.</p>
+      <span class="exp-tag">Escolar</span>
+    </article>
+
+    <article class="exp-card reveal" aria-label="Experiencia familiar">
+      <div class="exp-icon" aria-hidden="true">🎮</div>
+      <h3>AVENTURA FAMILIAR</h3>
+      <p>Entretenimiento para todas las edades. Experiencias seguras, divertidas y adaptadas para disfrutar en familia de los fines de semana.</p>
+      <span class="exp-tag">Familias</span>
+    </article>
+
+  </div>
+
+  <div class="highlight-band reveal">
+    <div class="hl-item">
+      <span class="hl-num">HTC</span>
+      <span class="hl-label">Vive Pro 2</span>
+    </div>
+    <div class="hl-item">
+      <span class="hl-num">360°</span>
+      <span class="hl-label">Visión completa</span>
+    </div>
+    <div class="hl-item">
+      <span class="hl-num">4K</span>
+      <span class="hl-label">Resolución</span>
+    </div>
+    <div class="hl-item">
+      <span class="hl-num">RTX</span>
+      <span class="hl-label">Gráficos</span>
+    </div>
+    <div style="margin-left:auto">
+      <a href="#contacto" class="btn-primary"><span>RESERVAR SESIÓN</span></a>
+    </div>
+  </div>
+</section>
+
+<div class="divider" aria-hidden="true"></div>
+
+<!-- ════════════ NOSOTROS ════════════ -->
+<section id="nosotros" aria-labelledby="about-heading">
+  <div class="about">
+    <div class="about-content">
+      <p class="section-tag">Quiénes somos</p>
+      <h2 class="section-title reveal" id="about-heading">Apasionados por <span>Galicia</span> y la tecnología</h2>
+      <p class="section-desc reveal">
+        Somos un equipo de jóvenes gallegos, inquietos y ambiciosos, unidos por la pasión por nuestra tierra y la innovación. Creemos en una forma diferente de descubrir Galicia: más inmersiva, más sensorial y más emocional.
+      </p>
+      <div class="about-values reveal">
+        <div class="value-item">
+          <div class="value-icon">🔬</div>
+          <div class="value-text">
+            <h4>INNOVACIÓN</h4>
+            <p>Actualización constante de equipos y contenidos para ofrecer siempre la mejor experiencia.</p>
+          </div>
+        </div>
+        <div class="value-item">
+          <div class="value-icon">🛡️</div>
+          <div class="value-text">
+            <h4>CALIDAD Y SEGURIDAD</h4>
+            <p>La experiencia del cliente es nuestra máxima prioridad en cada sesión.</p>
+          </div>
+        </div>
+        <div class="value-item">
+          <div class="value-icon">🌍</div>
+          <div class="value-text">
+            <h4>ACCESIBILIDAD</h4>
+            <p>Precios razonables y actividades para todas las edades y perfiles.</p>
+          </div>
+        </div>
+        <div class="value-item">
+          <div class="value-icon">🤝</div>
+          <div class="value-text">
+            <h4>COLABORACIÓN</h4>
+            <p>Apoyo activo a la comunidad educativa y al turismo tecnológico gallego.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="about-visual reveal">
+      <div class="about-frame">
+        <!-- VR atmospheric placeholder -->
+        <svg viewBox="0 0 400 500" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;position:absolute;inset:0;">
+          <defs>
+            <radialGradient id="vg1" cx="50%" cy="40%" r="60%">
+              <stop offset="0%" stop-color="#2d3bff" stop-opacity="0.3"/>
+              <stop offset="100%" stop-color="#03010a" stop-opacity="1"/>
+            </radialGradient>
+            <radialGradient id="vg2" cx="30%" cy="70%" r="50%">
+              <stop offset="0%" stop-color="#7b2fff" stop-opacity="0.2"/>
+              <stop offset="100%" stop-color="transparent" stop-opacity="0"/>
+            </radialGradient>
+          </defs>
+          <rect width="400" height="500" fill="#060212"/>
+          <rect width="400" height="500" fill="url(#vg1)"/>
+          <rect width="400" height="500" fill="url(#vg2)"/>
+          <!-- Grid lines -->
+          <g stroke="rgba(45,59,255,0.1)" stroke-width="0.5">
+            <line x1="0" y1="100" x2="400" y2="100"/>
+            <line x1="0" y1="200" x2="400" y2="200"/>
+            <line x1="0" y1="300" x2="400" y2="300"/>
+            <line x1="0" y1="400" x2="400" y2="400"/>
+            <line x1="100" y1="0" x2="100" y2="500"/>
+            <line x1="200" y1="0" x2="200" y2="500"/>
+            <line x1="300" y1="0" x2="300" y2="500"/>
+          </g>
+          <!-- VR headset simplified icon -->
+          <g transform="translate(200,220)">
+            <ellipse cx="0" cy="0" rx="100" ry="55" fill="none" stroke="rgba(45,59,255,0.6)" stroke-width="2"/>
+            <rect x="-65" y="-30" width="130" height="60" rx="20" fill="rgba(45,59,255,0.15)" stroke="rgba(0,229,255,0.5)" stroke-width="1.5"/>
+            <ellipse cx="-28" cy="0" rx="22" ry="18" fill="rgba(0,229,255,0.1)" stroke="rgba(0,229,255,0.4)" stroke-width="1"/>
+            <ellipse cx="28" cy="0" rx="22" ry="18" fill="rgba(0,229,255,0.1)" stroke="rgba(0,229,255,0.4)" stroke-width="1"/>
+            <!-- Lens glint -->
+            <circle cx="-22" cy="-6" r="5" fill="rgba(255,255,255,0.08)"/>
+            <circle cx="34" cy="-6" r="5" fill="rgba(255,255,255,0.08)"/>
+          </g>
+          <!-- Floating particles -->
+          <circle cx="60" cy="80" r="2" fill="var(--accent-cyan, #00e5ff)" opacity="0.5"/>
+          <circle cx="340" cy="140" r="1.5" fill="#7b2fff" opacity="0.6"/>
+          <circle cx="100" cy="400" r="2" fill="rgba(0,229,255,0.5)"/>
+          <circle cx="320" cy="380" r="1" fill="rgba(45,59,255,0.8)"/>
+          <circle cx="180" cy="60" r="3" fill="rgba(123,47,255,0.4)"/>
+          <!-- Corner bracket -->
+          <path d="M20 20 L20 60 M20 20 L60 20" stroke="rgba(0,229,255,0.3)" stroke-width="1.5" fill="none"/>
+          <path d="M380 480 L380 440 M380 480 L340 480" stroke="rgba(123,47,255,0.3)" stroke-width="1.5" fill="none"/>
+          <!-- Label -->
+          <text x="200" y="360" text-anchor="middle" font-family="Orbitron,monospace" font-size="11" fill="rgba(0,229,255,0.5)" letter-spacing="4">REALIDAD VIRTUAL</text>
+          <text x="200" y="380" text-anchor="middle" font-family="Orbitron,monospace" font-size="8" fill="rgba(255,255,255,0.2)" letter-spacing="3">VIGO · GALICIA</text>
+        </svg>
+      </div>
+      <div class="about-frame-deco" aria-hidden="true"></div>
+      <div class="about-frame-deco2" aria-hidden="true"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════ EQUIPO ════════════ -->
+<section class="team-section" aria-labelledby="team-heading">
+  <p class="section-tag">El equipo</p>
+  <h2 class="section-title reveal" id="team-heading">Los <span>Promotores</span></h2>
+  <p class="section-desc reveal">Cuatro jóvenes gallegos con pasión por la tecnología inmersiva y la cultura de su tierra.</p>
+
+  <div class="team-grid">
+    <div class="team-card reveal">
+      <div class="team-avatar">A</div>
+      <h3>ADRIÁN</h3>
+      <p>Co-fundador & Dirección</p>
+    </div>
+    <div class="team-card reveal">
+      <div class="team-avatar">A</div>
+      <h3>ANTÓN</h3>
+      <p>Co-fundador & Tecnología</p>
+    </div>
+    <div class="team-card reveal">
+      <div class="team-avatar">X</div>
+      <h3>XIAN</h3>
+      <p>Co-fundador & Experiencias</p>
+    </div>
+    <div class="team-card reveal">
+      <div class="team-avatar">B</div>
+      <h3>BELARMINO</h3>
+      <p>Co-fundador & Operaciones</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider" aria-hidden="true"></div>
+
+<!-- ════════════ BLOG ════════════ -->
+<section id="blog" aria-labelledby="blog-heading">
+  <p class="section-tag">Noticias y actualidad</p>
+  <h2 class="section-title reveal" id="blog-heading">Blog <span>VirtuGal</span></h2>
+  <p class="section-desc reveal">Tendencias del sector VR, novedades de nuestro centro y experiencias de nuestros clientes.</p>
+
+  <div class="blog-grid">
+
+    <article class="blog-card reveal" data-category="tecnologia">
+      <div class="blog-thumb">🥽</div>
+      <div class="blog-body">
+        <span class="cat-badge">Tecnología</span>
+        <div class="blog-date">Marzo 2026</div>
+        <h3>La nueva generación de visores VR: qué esperar en 2026</h3>
+        <p>El mercado de la realidad virtual no para de evolucionar. Analizamos los últimos modelos y cómo impactan en las experiencias de nuestros visitantes.</p>
+        <a href="#" class="blog-read">LEER MÁS →</a>
+      </div>
+    </article>
+
+    <article class="blog-card reveal" data-category="galicia">
+      <div class="blog-thumb">🌊</div>
+      <div class="blog-body">
+        <span class="cat-badge">Galicia</span>
+        <div class="blog-date">Febrero 2026</div>
+        <h3>Rías Baixas en 360°: recreando el paraíso atlántico</h3>
+        <p>Cómo desarrollamos nuestra experiencia inmersiva de las Rías Baixas, captando la esencia del paisaje gallego con tecnología de última generación.</p>
+        <a href="#" class="blog-read">LEER MÁS →</a>
+      </div>
+    </article>
+
+    <article class="blog-card reveal" data-category="educacion">
+      <div class="blog-thumb">🎓</div>
+      <div class="blog-body">
+        <span class="cat-badge">Educación</span>
+        <div class="blog-date">Enero 2026</div>
+        <h3>VR en las aulas: el futuro del aprendizaje ya está aquí</h3>
+        <p>Colaboramos con centros educativos de Vigo para llevar la realidad virtual al aula. Descubre cómo la tecnología cambia la forma de enseñar.</p>
+        <a href="#" class="blog-read">LEER MÁS →</a>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+<div class="divider" aria-hidden="true"></div>
+
+<!-- ════════════ CONTACTO ════════════ -->
+<section id="contacto" class="contact-section" aria-labelledby="contact-heading">
+  <p class="section-tag">Contáctanos</p>
+  <h2 class="section-title reveal" id="contact-heading">¿Tienes alguna <span>pregunta</span>?</h2>
+  <p class="section-desc reveal">Escríbenos o pásate por nuestro local en Vigo. Estaremos encantados de atenderte.</p>
+
+  <div class="contact-grid" style="grid-template-columns:1fr 1fr 1fr; gap:2rem; margin-top:2rem;">
+
+    <div class="contact-detail reveal" style="flex-direction:column; padding:2rem; border:1px solid var(--border); background:var(--bg-dark); gap:1rem;">
+      <div class="contact-detail-icon" aria-hidden="true" style="width:44px;height:44px;">📍</div>
+      <div class="contact-detail-text">
+        <span>Dirección</span>
+        <p>Rúa Montero Ríos 8<br/>Centro - Areal, Vigo</p>
+      </div>
+    </div>
+
+    <div class="contact-detail reveal" style="flex-direction:column; padding:2rem; border:1px solid var(--border); background:var(--bg-dark); gap:1rem;">
+      <div class="contact-detail-icon" aria-hidden="true" style="width:44px;height:44px;">✉️</div>
+      <div class="contact-detail-text">
+        <span>Email</span>
+        <a href="mailto:virtugal@gmail.com">virtugal@gmail.com</a>
+      </div>
+    </div>
+
+    <div class="contact-detail reveal" style="flex-direction:column; padding:2rem; border:1px solid var(--border); background:var(--bg-dark); gap:1rem;">
+      <div class="contact-detail-icon" aria-hidden="true" style="width:44px;height:44px;">🕐</div>
+      <div class="contact-detail-text">
+        <span>Horario</span>
+        <p>Lun–Vie: 10:00–21:00<br/>Sáb–Dom: 10:00–22:00</p>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="map-placeholder reveal" role="img" aria-label="Mapa de localización" style="margin-top:2.5rem;">
+    <div class="map-icon">📍</div>
+    <span>Rúa Montero Ríos 8</span>
+    <p class="map-address">Centro - Areal · Vigo</p>
+  </div>
+</section>
+
+<!-- ════════════ FOOTER ════════════ -->
+<footer role="contentinfo">
+  <div class="footer-top">
+    <div class="footer-brand">
+      <a href="#inicio" class="nav-logo" style="font-size:1.2rem">VIRTU<span>GAL</span></a>
+      <p>Centro de experiencias de realidad virtual en Vigo. Descubre Galicia de una forma única, inmersiva y emocionante.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Navegación</h4>
+      <ul>
+        <li><a href="#inicio">Inicio</a></li>
+        <li><a href="#experiencias">Experiencias</a></li>
+        <li><a href="#nosotros">Sobre nosotros</a></li>
+        <li><a href="#blog">Blog</a></li>
+        <li><a href="#contacto">Contacto</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Experiencias</h4>
+      <ul>
+        <li><a href="#experiencias">Rías Baixas VR</a></li>
+        <li><a href="#experiencias">Rally Rías Baixas</a></li>
+        <li><a href="#experiencias">Historia de Galicia</a></li>
+        <li><a href="#experiencias">Team Building</a></li>
+        <li><a href="#experiencias">Educación</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Legal</h4>
+      <ul>
+        <li><a href="#" data-modal="modalPrivacidad">Política de Privacidad</a></li>
+        <li><a href="#" data-modal="modalLegal">Aviso Legal</a></li>
+        <li><a href="#" data-modal="modalCookies">Política de Cookies</a></li>
+        <li><a href="#" data-modal="modalTerminos">Términos de Uso</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© <span class="current-year"></span> VirtuGal · Todos los derechos reservados · Vigo, Galicia</p>
+    <div class="footer-legal">
+      <a href="#" data-modal="modalPrivacidad">Privacidad</a>
+      <a href="#" data-modal="modalLegal">Legal</a>
+      <a href="#" data-modal="modalCookies">Cookies</a>
+    </div>
+  </div>
+</footer>
+
+<!-- ════════════ COOKIES ════════════ -->
+<div id="cookieBanner" class="cookie-banner" role="dialog" aria-label="Aviso de cookies" aria-live="polite">
+  <p class="cookie-text">
+    Usamos cookies propias y de terceros para mejorar tu experiencia. Puedes aceptar todas o rechazar las no esenciales.
+    <a href="#" data-modal="modalCookies">Más información</a>
+  </p>
+  <div class="cookie-actions">
+    <button id="cookieReject" class="btn-cookie-reject">RECHAZAR</button>
+    <button id="cookieAccept" class="btn-cookie-accept">ACEPTAR</button>
+  </div>
+</div>
+
+<!-- ════════════ MODALES LEGALES ════════════ -->
+
+<!-- PRIVACIDAD -->
+<div id="modalPrivacidad" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="privTitle">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('modalPrivacidad')" aria-label="Cerrar">✕</button>
+    <h2 id="privTitle">POLÍTICA DE PRIVACIDAD</h2>
+
+    <p><strong>Responsable del tratamiento:</strong> VirtuGal (en proceso de constitución), con domicilio en Calle de Salamanca 11, Vigo (Pontevedra). Email: virtugal@gmail.com</p>
+
+    <h3>1. DATOS QUE RECABAMOS</h3>
+    <p>A través del formulario de contacto de esta web, recopilamos los siguientes datos personales: nombre, apellidos, dirección de correo electrónico, y el contenido del mensaje. La cumplimentación de los campos marcados con * es obligatoria para atender tu consulta.</p>
+
+    <h3>2. FINALIDAD DEL TRATAMIENTO</h3>
+    <p>Los datos facilitados se utilizarán exclusivamente para las siguientes finalidades:</p>
+    <ul>
+      <li>Gestionar y responder las consultas o solicitudes de reserva enviadas.</li>
+      <li>En caso de consentimiento expreso, enviar comunicaciones comerciales sobre novedades y promociones de VirtuGal.</li>
+    </ul>
+
+    <h3>3. BASE JURÍDICA</h3>
+    <p>El tratamiento se basa en el consentimiento del interesado al rellenar y enviar el formulario (art. 6.1.a RGPD) y en la ejecución de medidas precontractuales a petición del interesado (art. 6.1.b RGPD).</p>
+
+    <h3>4. CONSERVACIÓN DE DATOS</h3>
+    <p>Los datos se conservarán durante el tiempo necesario para atender la consulta y, posteriormente, durante los plazos legalmente establecidos. Los datos de contacto comercial se conservarán hasta la retirada del consentimiento.</p>
+
+    <h3>5. DESTINATARIOS</h3>
+    <p>Los datos no serán cedidos a terceros, salvo obligación legal. No se realizan transferencias internacionales de datos.</p>
+
+    <h3>6. DERECHOS DE LOS INTERESADOS</h3>
+    <p>Puedes ejercer los derechos de acceso, rectificación, supresión, oposición, limitación del tratamiento y portabilidad enviando un correo a <strong>virtugal@gmail.com</strong>, adjuntando copia de tu DNI. También puedes presentar reclamación ante la <strong>Agencia Española de Protección de Datos (www.aepd.es)</strong>.</p>
+
+    <h3>7. SEGURIDAD</h3>
+    <p>VirtuGal aplica las medidas técnicas y organizativas necesarias para garantizar la seguridad de los datos personales y prevenir su alteración, pérdida o acceso no autorizado.</p>
+  </div>
+</div>
+
+<!-- AVISO LEGAL -->
+<div id="modalLegal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="legalTitle">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('modalLegal')" aria-label="Cerrar">✕</button>
+    <h2 id="legalTitle">AVISO LEGAL</h2>
+
+    <h3>1. DATOS IDENTIFICATIVOS</h3>
+    <p><strong>Denominación social:</strong> VirtuGal<br/>
+    <strong>Domicilio:</strong> Calle de Salamanca 11, Vigo (Pontevedra), España<br/>
+    <strong>Email:</strong> virtugal@gmail.com<br/>
+    <strong>Web:</strong> www.virtugal.com</p>
+
+    <h3>2. OBJETO</h3>
+    <p>El presente Aviso Legal regula el acceso y uso del sitio web www.virtugal.com, titularidad de VirtuGal. El acceso al sitio web implica la aceptación plena de los términos aquí establecidos.</p>
+
+    <h3>3. PROPIEDAD INTELECTUAL E INDUSTRIAL</h3>
+    <p>Todos los contenidos de este sitio web (textos, imágenes, logotipos, diseño gráfico, código fuente y demás elementos) son titularidad de VirtuGal o de sus legítimos propietarios, y están protegidos por la normativa española e internacional de propiedad intelectual e industrial. Queda prohibida su reproducción, distribución, transformación o comunicación pública sin autorización expresa.</p>
+
+    <h3>4. CONDICIONES DE ACCESO Y USO</h3>
+    <p>El usuario se compromete a hacer un uso lícito del sitio web, conforme a la legislación vigente, y a no realizar actividades que puedan dañar, inutilizar o deteriorar el sitio o impedir un normal disfrute por parte de otros usuarios.</p>
+
+    <h3>5. EXCLUSIÓN DE GARANTÍAS Y RESPONSABILIDAD</h3>
+    <p>VirtuGal no garantiza la inexistencia de errores en los contenidos del sitio web ni en la disponibilidad ininterrumpida del mismo. VirtuGal no será responsable de los daños y perjuicios de cualquier naturaleza que pudieran ocasionarse por el mal uso del sitio web.</p>
+
+    <h3>6. LEGISLACIÓN APLICABLE</h3>
+    <p>Las relaciones entre VirtuGal y los usuarios se rigen por la legislación española, en particular la Ley 34/2002 de Servicios de la Sociedad de la Información (LSSI), el Reglamento (UE) 2016/679 (RGPD) y la Ley Orgánica 3/2018 (LOPDGDD).</p>
+  </div>
+</div>
+
+<!-- COOKIES -->
+<div id="modalCookies" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="cookieTitle">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('modalCookies')" aria-label="Cerrar">✕</button>
+    <h2 id="cookieTitle">POLÍTICA DE COOKIES</h2>
+
+    <p>De conformidad con la LSSI y la normativa de cookies de la UE, VirtuGal informa sobre el uso de cookies en este sitio web.</p>
+
+    <h3>¿QUÉ SON LAS COOKIES?</h3>
+    <p>Las cookies son pequeños ficheros de datos que se almacenan en el dispositivo del usuario al visitar un sitio web. Permiten a la web recordar información sobre tu visita.</p>
+
+    <h3>COOKIES QUE UTILIZAMOS</h3>
+    <ul>
+      <li><strong>Cookies técnicas (esenciales):</strong> Necesarias para el correcto funcionamiento del sitio (ej.: preferencia de cookies). No requieren consentimiento.</li>
+      <li><strong>Cookies de análisis:</strong> Utilizadas para medir el número de visitas y el comportamiento de los usuarios con fines estadísticos. Sólo se activan con tu consentimiento.</li>
+      <li><strong>Cookies de personalización:</strong> Permiten recordar preferencias del usuario. Sólo se activan con tu consentimiento.</li>
+    </ul>
+
+    <h3>GESTIÓN DE COOKIES</h3>
+    <p>Puedes aceptar o rechazar las cookies no esenciales mediante el banner que aparece al entrar en la web. Asimismo, puedes configurar o deshabilitar las cookies desde tu navegador. Ten en cuenta que deshabilitar ciertas cookies puede afectar a la funcionalidad del sitio.</p>
+
+    <h3>INFORMACIÓN ADICIONAL</h3>
+    <p>Para más información, contacta con nosotros en <strong>virtugal@gmail.com</strong>. Para ejercer tus derechos en materia de protección de datos, consulta nuestra <a href="#" onclick="closeModal('modalCookies'); openModal('modalPrivacidad')" style="color:var(--accent-cyan)">Política de Privacidad</a>.</p>
+  </div>
+</div>
+
+<!-- TÉRMINOS -->
+<div id="modalTerminos" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="termTitle">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('modalTerminos')" aria-label="Cerrar">✕</button>
+    <h2 id="termTitle">TÉRMINOS DE USO DEL SERVICIO</h2>
+
+    <h3>1. RESERVAS</h3>
+    <p>Las reservas se realizan a través del formulario de contacto o telefónicamente. VirtuGal confirmará la disponibilidad y enviará confirmación por email. Las reservas no se consideran definitivas hasta recibir la confirmación.</p>
+
+    <h3>2. EDAD MÍNIMA</h3>
+    <p>Las experiencias de realidad virtual están diseñadas para mayores de 7 años. Los menores de 14 años deberán estar acompañados por un adulto responsable. VirtuGal se reserva el derecho de denegar el servicio si considera que puede suponer un riesgo para la salud del usuario.</p>
+
+    <h3>3. SALUD Y SEGURIDAD</h3>
+    <p>Las personas con epilepsia fotosensible, mareos severos, embarazadas o con problemas cardíacos deben consultar a su médico antes de usar equipos de realidad virtual. VirtuGal no será responsable de las consecuencias derivadas del uso del servicio por personas con condiciones de salud incompatibles.</p>
+
+    <h3>4. RESPONSABILIDAD</h3>
+    <p>Los usuarios son responsables de los daños ocasionados a los equipos por uso indebido. VirtuGal no se hace responsable de objetos personales perdidos o sustraídos en las instalaciones.</p>
+
+    <h3>5. CANCELACIONES</h3>
+    <p>Las cancelaciones con más de 24 horas de antelación serán gestionadas sin coste. Cancelaciones con menos de 24 horas podrán estar sujetas a condiciones específicas según el tipo de reserva.</p>
+
+    <h3>6. FOTOGRAFÍAS Y GRABACIONES</h3>
+    <p>VirtuGal podrá tomar fotografías o vídeos de las sesiones para uso en redes sociales y materiales promocionales, siempre con el consentimiento expreso del usuario. Puedes revocar este consentimiento en cualquier momento.</p>
+  </div>
+</div>
+
+<script src="js/main.js"></script>
+</body>
+</html>
